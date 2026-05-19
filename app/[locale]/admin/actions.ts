@@ -2,13 +2,15 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { getLocale } from "next-intl/server";
 import { prisma } from "@/lib/db";
 import { auth } from "@/auth";
 
 async function requireAdmin() {
   const session = await auth();
   if (!session?.user?.isAdmin) {
-    redirect("/login?callbackUrl=/admin");
+    const locale = await getLocale();
+    redirect(`/${locale}/login?callbackUrl=/${locale}/admin`);
   }
 }
 
@@ -43,32 +45,24 @@ export async function createProduct(formData: FormData) {
   const data = parseForm(formData);
   if (!data.name) throw new Error("Name required");
   await prisma.product.create({ data });
-  revalidatePath("/admin");
-  revalidatePath("/products");
-  revalidatePath("/");
+  revalidatePath("/", "layout");
 }
 
 export async function updateProduct(id: string, formData: FormData) {
   await requireAdmin();
   const data = parseForm(formData);
   await prisma.product.update({ where: { id }, data });
-  revalidatePath("/admin");
-  revalidatePath("/products");
-  revalidatePath(`/products/${id}`);
-  revalidatePath("/");
+  revalidatePath("/", "layout");
 }
 
 export async function deleteProduct(id: string) {
   await requireAdmin();
   await prisma.product.delete({ where: { id } });
-  revalidatePath("/admin");
-  revalidatePath("/products");
-  revalidatePath("/");
+  revalidatePath("/", "layout");
 }
 
 export async function updateOrderStatus(orderId: string, status: "PENDING" | "PAID" | "SHIPPED" | "DELIVERED" | "CANCELLED") {
   await requireAdmin();
   await prisma.order.update({ where: { id: orderId }, data: { status } });
-  revalidatePath("/admin/orders");
-  revalidatePath("/admin/dashboard");
+  revalidatePath("/", "layout");
 }

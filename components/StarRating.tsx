@@ -8,8 +8,8 @@ export default function StarRating({ rating }: { rating: number }) {
           key={i}
           className={`w-4 h-4 ${
             i <= Math.round(rating)
-              ? "fill-amber-400 text-amber-400"
-              : "fill-gray-200 text-gray-200"
+              ? "fill-lime-500 text-lime-500"
+              : "fill-stone-200 text-stone-200"
           }`}
         />
       ))}

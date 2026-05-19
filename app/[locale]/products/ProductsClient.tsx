@@ -37,24 +37,25 @@ export default function ProductsClient({ products }: { products: Product[] }) {
   else if (sort === "featured") filtered = [...filtered].sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      <div className="mb-8">
-        <h1 className="text-3xl font-extrabold text-gray-900">
-          {category === "All" ? "All Products" : category}
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="mb-10">
+        <span className="text-xs font-semibold uppercase tracking-widest text-lime-600">Catalog</span>
+        <h1 className="text-4xl font-black text-stone-950 tracking-tight mt-2">
+          {category === "All" ? "All products" : category}
         </h1>
-        <p className="text-gray-500 mt-1">{filtered.length} products</p>
+        <p className="text-stone-500 mt-1 text-sm">{filtered.length} items</p>
       </div>
 
-      <div className="flex flex-col sm:flex-row gap-4 mb-8">
+      <div className="flex flex-col sm:flex-row gap-4 mb-10">
         <div className="flex gap-2 flex-wrap">
           {CATEGORIES.map((c) => (
             <button
               key={c}
               onClick={() => setCategory(c)}
-              className={`px-4 py-1.5 rounded-full text-sm font-medium border transition-colors ${
+              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors ${
                 category === c
-                  ? "bg-indigo-600 text-white border-indigo-600"
-                  : "bg-white text-gray-600 border-gray-200 hover:border-indigo-400"
+                  ? "bg-black text-white"
+                  : "bg-white text-stone-700 ring-1 ring-stone-200 hover:ring-black"
               }`}
             >
               {c}
@@ -63,11 +64,11 @@ export default function ProductsClient({ products }: { products: Product[] }) {
         </div>
 
         <div className="sm:ml-auto flex items-center gap-2">
-          <SlidersHorizontal className="w-4 h-4 text-gray-400" />
+          <SlidersHorizontal className="w-4 h-4 text-stone-400" />
           <select
             value={sort}
             onChange={(e) => setSort(e.target.value)}
-            className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 bg-white text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-300"
+            className="text-sm border border-stone-200 rounded-full px-4 py-1.5 bg-white text-stone-700 focus:outline-none focus:ring-2 focus:ring-black"
           >
             {SORT_OPTIONS.map((o) => (
               <option key={o.value} value={o.value}>{o.label}</option>
@@ -77,7 +78,7 @@ export default function ProductsClient({ products }: { products: Product[] }) {
       </div>
 
       {filtered.length === 0 ? (
-        <div className="text-center py-24 text-gray-400">No products found in this category.</div>
+        <div className="text-center py-24 text-stone-400">No products found in this category.</div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filtered.map((p) => (
