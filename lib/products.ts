@@ -1,0 +1,153 @@
+export type Product = {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  category: string;
+  image: string;
+  rating: number;
+  reviews: number;
+  stock: number;
+  featured?: boolean;
+};
+
+export const CATEGORIES = ["All", "Electronics", "Clothing", "Home", "Books", "Sports"];
+
+export const products: Product[] = [
+  {
+    id: "1",
+    name: "Wireless Noise-Cancelling Headphones",
+    description: "Premium over-ear headphones with 40-hour battery life, adaptive noise cancellation, and Hi-Res Audio support. Perfect for commuting, work, or relaxing at home.",
+    price: 299.99,
+    category: "Electronics",
+    image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&q=80",
+    rating: 4.8,
+    reviews: 2341,
+    stock: 15,
+    featured: true,
+  },
+  {
+    id: "2",
+    name: "Minimalist Leather Watch",
+    description: "Swiss-movement timepiece with a genuine leather strap, sapphire crystal glass, and water resistance to 50m. Timeless design for any occasion.",
+    price: 189.00,
+    category: "Clothing",
+    image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&q=80",
+    rating: 4.6,
+    reviews: 876,
+    stock: 8,
+    featured: true,
+  },
+  {
+    id: "3",
+    name: "Ultrawide 4K Monitor",
+    description: "34-inch curved ultrawide display with 4K resolution, 144Hz refresh rate, HDR600, and USB-C connectivity. Immersive for work and gaming alike.",
+    price: 749.99,
+    category: "Electronics",
+    image: "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=600&q=80",
+    rating: 4.7,
+    reviews: 1120,
+    stock: 6,
+    featured: true,
+  },
+  {
+    id: "4",
+    name: "Premium Yoga Mat",
+    description: "Extra-thick 6mm non-slip yoga mat made from eco-friendly TPE material. Includes carrying strap and alignment guide lines.",
+    price: 65.00,
+    category: "Sports",
+    image: "https://images.unsplash.com/photo-1601925260368-ae2f83cf8b7f?w=600&q=80",
+    rating: 4.5,
+    reviews: 543,
+    stock: 40,
+  },
+  {
+    id: "5",
+    name: "Stainless Steel Water Bottle",
+    description: "Vacuum-insulated 32oz bottle keeps drinks cold 24h or hot 12h. BPA-free, leak-proof lid, fits most cup holders.",
+    price: 39.99,
+    category: "Sports",
+    image: "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=600&q=80",
+    rating: 4.9,
+    reviews: 3210,
+    stock: 100,
+  },
+  {
+    id: "6",
+    name: "Linen Button-Down Shirt",
+    description: "Relaxed-fit premium linen shirt, breathable and lightweight. Available in multiple colors. Machine washable.",
+    price: 72.00,
+    category: "Clothing",
+    image: "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=600&q=80",
+    rating: 4.3,
+    reviews: 287,
+    stock: 25,
+  },
+  {
+    id: "7",
+    name: "Smart Home Speaker",
+    description: "360° room-filling sound with built-in voice assistant, multi-room audio support, and a premium fabric finish that complements any décor.",
+    price: 129.99,
+    category: "Electronics",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80",
+    rating: 4.4,
+    reviews: 1893,
+    stock: 22,
+    featured: true,
+  },
+  {
+    id: "8",
+    name: "Cast Iron Skillet",
+    description: "Pre-seasoned 12-inch cast iron skillet. Even heat distribution, oven-safe to 500°F, compatible with all cooktops including induction.",
+    price: 44.95,
+    category: "Home",
+    image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80",
+    rating: 4.8,
+    reviews: 4502,
+    stock: 33,
+  },
+  {
+    id: "9",
+    name: "Mechanical Keyboard",
+    description: "Compact TKL mechanical keyboard with Cherry MX switches, per-key RGB, aluminum frame, and USB-C detachable cable.",
+    price: 159.00,
+    category: "Electronics",
+    image: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?w=600&q=80",
+    rating: 4.7,
+    reviews: 967,
+    stock: 18,
+  },
+  {
+    id: "10",
+    name: "Atomic Habits",
+    description: "James Clear's #1 New York Times bestseller. The definitive guide to building good habits and breaking bad ones through tiny, compounding changes.",
+    price: 18.99,
+    category: "Books",
+    image: "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=600&q=80",
+    rating: 4.9,
+    reviews: 12840,
+    stock: 200,
+  },
+  {
+    id: "11",
+    name: "Ceramic Pour-Over Coffee Set",
+    description: "Handcrafted ceramic dripper and carafe set for barista-quality pour-over coffee at home. Includes stainless steel filter.",
+    price: 58.00,
+    category: "Home",
+    image: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=600&q=80",
+    rating: 4.6,
+    reviews: 731,
+    stock: 14,
+  },
+  {
+    id: "12",
+    name: "Running Shoes",
+    description: "Lightweight performance running shoes with responsive foam midsole, breathable mesh upper, and durable rubber outsole. Ideal for road and track.",
+    price: 124.99,
+    category: "Sports",
+    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80",
+    rating: 4.5,
+    reviews: 2109,
+    stock: 30,
+  },
+];
