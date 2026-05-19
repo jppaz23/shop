@@ -1,12 +1,15 @@
 import { Suspense } from "react";
 import ProductsClient from "./ProductsClient";
+import { getAllProducts } from "@/lib/queries";
 
 export const metadata = { title: "All Products — Shoply" };
+export const dynamic = "force-dynamic";
 
-export default function ProductsPage() {
+export default async function ProductsPage() {
+  const products = await getAllProducts();
   return (
     <Suspense fallback={<div className="p-20 text-center text-gray-400">Loading products…</div>}>
-      <ProductsClient />
+      <ProductsClient products={products} />
     </Suspense>
   );
 }

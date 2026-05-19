@@ -1,10 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Truck, RotateCcw, Shield } from "lucide-react";
-import { products } from "@/lib/products";
+import { getFeaturedProducts } from "@/lib/queries";
 import ProductCard from "@/components/ProductCard";
 
-const featured = products.filter((p) => p.featured).slice(0, 4);
 const categories = [
   { name: "Electronics", image: "https://images.unsplash.com/photo-1468495244123-6c6c332eeece?w=400&q=80" },
   { name: "Clothing", image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&q=80" },
@@ -12,10 +11,13 @@ const categories = [
   { name: "Sports", image: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=400&q=80" },
 ];
 
-export default function HomePage() {
+export const dynamic = "force-dynamic";
+
+export default async function HomePage() {
+  const featured = await getFeaturedProducts(4);
+
   return (
     <div className="flex flex-col">
-      {/* Hero */}
       <section className="relative bg-gradient-to-br from-indigo-950 via-indigo-800 to-violet-700 text-white overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1600&q=60')] bg-cover bg-center opacity-20" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-28 lg:py-40">
@@ -47,7 +49,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Trust bar */}
       <section className="bg-indigo-600 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 grid grid-cols-1 sm:grid-cols-3 gap-4 text-center text-sm font-medium">
           <div className="flex items-center justify-center gap-2">
@@ -62,25 +63,25 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Featured Products */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="flex items-center justify-between mb-10">
-          <div>
-            <h2 className="text-3xl font-extrabold text-gray-900">Featured Products</h2>
-            <p className="text-gray-500 mt-1">Handpicked by our team</p>
+      {featured.length > 0 && (
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+          <div className="flex items-center justify-between mb-10">
+            <div>
+              <h2 className="text-3xl font-extrabold text-gray-900">Featured Products</h2>
+              <p className="text-gray-500 mt-1">Handpicked by our team</p>
+            </div>
+            <Link href="/products" className="text-indigo-600 font-semibold text-sm flex items-center gap-1 hover:underline">
+              View all <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
-          <Link href="/products" className="text-indigo-600 font-semibold text-sm flex items-center gap-1 hover:underline">
-            View all <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {featured.map((p) => (
-            <ProductCard key={p.id} product={p} />
-          ))}
-        </div>
-      </section>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {featured.map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
+          </div>
+        </section>
+      )}
 
-      {/* Category grid */}
       <section className="bg-gray-50 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-extrabold text-gray-900 mb-10 text-center">Shop by Category</h2>
@@ -106,7 +107,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* CTA banner */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="bg-gradient-to-r from-violet-600 to-indigo-600 rounded-3xl p-10 lg:p-16 text-white flex flex-col lg:flex-row items-center justify-between gap-6">
           <div>

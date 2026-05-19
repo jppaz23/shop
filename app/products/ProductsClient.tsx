@@ -1,8 +1,7 @@
 "use client";
 
 import { useSearchParams, useRouter } from "next/navigation";
-import { CATEGORIES } from "@/lib/products";
-import { useAdminStore } from "@/lib/store";
+import { CATEGORIES, type Product } from "@/lib/products";
 import ProductCard from "@/components/ProductCard";
 import { SlidersHorizontal } from "lucide-react";
 import { useState } from "react";
@@ -15,10 +14,9 @@ const SORT_OPTIONS = [
   { label: "Most Reviews", value: "reviews" },
 ];
 
-export default function ProductsClient() {
+export default function ProductsClient({ products }: { products: Product[] }) {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const adminProducts = useAdminStore((s) => s.products);
 
   const category = searchParams.get("category") ?? "All";
   const [sort, setSort] = useState("featured");
@@ -30,12 +28,13 @@ export default function ProductsClient() {
     router.push(`/products?${params.toString()}`);
   };
 
-  let filtered = category === "All" ? adminProducts : adminProducts.filter((p) => p.category === category);
+  let filtered = category === "All" ? products : products.filter((p) => p.category === category);
 
   if (sort === "price_asc") filtered = [...filtered].sort((a, b) => a.price - b.price);
   else if (sort === "price_desc") filtered = [...filtered].sort((a, b) => b.price - a.price);
   else if (sort === "rating") filtered = [...filtered].sort((a, b) => b.rating - a.rating);
   else if (sort === "reviews") filtered = [...filtered].sort((a, b) => b.reviews - a.reviews);
+  else if (sort === "featured") filtered = [...filtered].sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">

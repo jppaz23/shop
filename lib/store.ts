@@ -55,20 +55,3 @@ export const useCartStore = create<CartStore>()(
     }
   )
 );
-
-// Admin product store (in-memory, seeded from products list)
-import { products as seedProducts } from "./products";
-
-type AdminStore = {
-  products: Product[];
-  addProduct: (p: Omit<Product, "id">) => void;
-  updateProduct: (p: Product) => void;
-  deleteProduct: (id: string) => void;
-};
-
-export const useAdminStore = create<AdminStore>()((set, get) => ({
-  products: seedProducts,
-  addProduct: (p) => set({ products: [...get().products, { ...p, id: Date.now().toString() }] }),
-  updateProduct: (p) => set({ products: get().products.map((x) => (x.id === p.id ? p : x)) }),
-  deleteProduct: (id) => set({ products: get().products.filter((x) => x.id !== id) }),
-}));
